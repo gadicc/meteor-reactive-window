@@ -7,7 +7,7 @@ The start of some reactive helpers to work with screen size, etc.
 * `rwindow.get('outerWidth')` - current screen width
 * `rwindow.get('outerHeight')` - current screen height
 * `rwindow.get('screen')` - like Bootstrap 3: xsmall, small, medium, large
-* Also: `innerWidth`, `outerWidth`, `innerHeight`, `outerHeight`
+* Also: `innerWidth`, `innerHeight`
 * And jQuery, `$width` = $(window).width() and `$height` = $(window).height()
 
 ## In Templates:

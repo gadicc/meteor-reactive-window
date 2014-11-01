@@ -16,7 +16,6 @@ _.each(shortcuts, function(s) {
 });
 
 var update = function() {
-	console.log('updating');
 	rwindow.set('innerWidth', window.innerWidth);
 	rwindow.set('outerWidth', window.outerWidth);
 	rwindow.set('$width', $(window).width());
@@ -38,29 +37,32 @@ var update = function() {
 // Set a debounce function for avoiding to fire too many events
 var lazyUpdate = _.debounce(update, 100);
 
-// Watch for resize events
-var origOnResize = window.onresize;
-window.onresize = function() {
-	if (origOnResize)
-		origOnResize.apply(this, arguments);
-	lazyUpdate();
-}
-
-// Watch for mutation events
+// Set event only after DOM is ready
 $(function() {
-	var insertedNodes = [];
-	var observer = new MutationObserver(function(mutations) {
-		mutations.forEach(function(mutation) {
-			for (var i = 0; i < mutation.addedNodes.length; i++)
-				insertedNodes.push(mutation.addedNodes[i]);
-		})
+	// Watch for resize events
+	var origOnResize = window.onresize;
+	window.onresize = function() {
+		if (origOnResize)
+			origOnResize.apply(this, arguments);
 		lazyUpdate();
-	});
-	observer.observe(document, {
-		childList: true,
-		attributes: true,
-		characterData: true,
-		subtree: true,
-		attributeFilter: true
+	}
+
+	// Watch for mutation events
+	$(function() {
+		var insertedNodes = [];
+		var observer = new MutationObserver(function(mutations) {
+			mutations.forEach(function(mutation) {
+				for (var i = 0; i < mutation.addedNodes.length; i++)
+					insertedNodes.push(mutation.addedNodes[i]);
+			})
+			lazyUpdate();
+		});
+		observer.observe(document, {
+			childList: true,
+			attributes: true,
+			characterData: true,
+			subtree: true,
+			attributeFilter: true
+		});
 	});
 });

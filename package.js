@@ -3,7 +3,7 @@ Package.describe({
 });
 
 Package.on_use(function (api) {
-  api.use(['jquery', 'underscore', 'ui', 'reactive-dict'], 'client');
+  api.use(['jquery', 'underscore', 'reactive-dict', 'blaze'], 'client');
   api.add_files('reactive-window.js', 'client');
   api.export('rwindow', 'client');
 });

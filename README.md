@@ -4,8 +4,9 @@ The start of some reactive helpers to work with screen size, etc.
 
 ## In JavaScript:
 
-* `rwindow.get('width')` - current screen width
-* `rwindow.get('screen')` - like bs3: xsmall, small, medium, large
+* `rwindow.get('outerWidth')` - current screen width
+* `rwindow.get('outerHeight')` - current screen height
+* `rwindow.get('screen')` - like Bootstrap 3: xsmall, small, medium, large
 * Also: `innerWidth`, `outerWidth`, `innerHeight`, `outerHeight`
 * And jQuery, `$width` = $(window).width() and `$height` = $(window).height()
 

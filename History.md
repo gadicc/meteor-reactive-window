@@ -3,6 +3,7 @@
 ## v1.0.1
 
 * Only setup the MutationObserver if it's available (in current browser)
+* window stub for phantomjs, since it doesn't do outerWidth, etc.
 
 ## v1.0.0
 

@@ -1,6 +1,10 @@
 ## vNEXT
 
-## 1.0.0
+## v1.0.1
+
+* Only setup the MutationObserver if it's available (in current browser)
+
+## v1.0.0
 
 * Released via Meteor Package Server
 * Method shortcuts, `rwindow.get('screen')` is now `rwindow.screen()`

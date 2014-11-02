@@ -88,7 +88,7 @@ $(function() {
 	}
 
 	// Watch for mutation events
-	$(function() {
+	if (typeof MutationObserver === 'function') {
 		var insertedNodes = [];
 		var observer = new MutationObserver(function(mutations) {
 			mutations.forEach(function(mutation) {
@@ -104,7 +104,8 @@ $(function() {
 			subtree: true,
 			attributeFilter: true
 		});
-	});
+	}
 
+	// Update first value now that DOM is ready
 	lazyUpdate();
 });

@@ -3,7 +3,7 @@ if (!window._phantom) {
   console.log("Don't forget to make sure popups are enabled");
 	testWindow = window.open("", "reactive-window-tests", "width=100, height=100");
 } else {
-	// Stub for phantomjs
+	// Stub for phantomjs, because of https://github.com/ariya/phantomjs/issues/12010
 	function fakeWindow(width, height) {
 		this.document = { documentElement: {} };
 		this.window = this;

@@ -5,9 +5,12 @@ rwindow = {
 }
 
 var rwindowHelpers = {};
-UI.registerHelper('rwindow', rwindowHelpers);
+Blaze.registerHelper('rwindow', rwindowHelpers);
 
-var shortcuts = ['innerWidth', 'outerWidth', '$width', 'innerHeight', 'outerHeight', '$height', 'screen'];
+var shortcuts = [
+	'innerWidth', 'outerWidth', '$width', 'innerHeight', 'outerHeight',
+	'$height', 'screen'
+];
 _.each(shortcuts, function(s) {
 	rwindow[s] = rwindowHelpers[s] = function() { return rwindow.dict.get(s); }
 });
@@ -23,23 +26,43 @@ var update = function() {
 	// http://getbootstrap.com/css/
 	if (window.outerWidth < 768)
 		rwindow.set('screen', 'xsmall');
-	else if (window.outerWidth < 992)	
+	else if (window.outerWidth < 992)
 		rwindow.set('screen', 'small');
-	else if (window.outerWidth < 1200)	
+	else if (window.outerWidth < 1200)
 		rwindow.set('screen', 'medium');
 	else
 		rwindow.set('screen', 'large');
 }
 
-var origOnResize = window.onresize;
-window.onresize = function() {
-	if (origOnResize)
-		origOnResize.apply(this, arguments);
-	update();
-}
+// Set a debounce function for avoiding to fire too many events
+var lazyUpdate = _.debounce(update, 100);
 
-Meteor.setInterval(function() {
-	// detect if scrollbar added
-	update();
-}, 100);
-update();
+// Set event only after DOM is ready
+$(function() {
+	// Watch for resize events
+	var origOnResize = window.onresize;
+	window.onresize = function() {
+		if (origOnResize)
+			origOnResize.apply(this, arguments);
+		lazyUpdate();
+	}
+
+	// Watch for mutation events
+	$(function() {
+		var insertedNodes = [];
+		var observer = new MutationObserver(function(mutations) {
+			mutations.forEach(function(mutation) {
+				for (var i = 0; i < mutation.addedNodes.length; i++)
+					insertedNodes.push(mutation.addedNodes[i]);
+			})
+			lazyUpdate();
+		});
+		observer.observe(document, {
+			childList: true,
+			attributes: true,
+			characterData: true,
+			subtree: true,
+			attributeFilter: true
+		});
+	});
+});

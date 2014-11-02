@@ -88,7 +88,7 @@ $(function() {
 	}
 
 	// Watch for mutation events
-	if (typeof MutationObserver === 'function') {
+	if (typeof MutationObserver === 'function' && win.document.children) {
 		var insertedNodes = [];
 		var observer = new MutationObserver(function(mutations) {
 			mutations.forEach(function(mutation) {

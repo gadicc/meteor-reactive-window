@@ -5,7 +5,7 @@ rwindow = {
 }
 
 var rwindowHelpers = {};
-UI.registerHelper('rwindow', rwindowHelpers);
+Blaze.registerHelper('rwindow', rwindowHelpers);
 
 var shortcuts = [
 	'innerWidth', 'outerWidth', '$width', 'innerHeight', 'outerHeight',

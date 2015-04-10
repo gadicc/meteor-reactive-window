@@ -72,12 +72,13 @@ var update = function() {
 	else
 		rwindow.set('screen', 'large');
 }
+
 rwindow.forceUpdate = update;
 
 // Set a debounce function for avoiding to fire too many events
-var lazyUpdate = _.debounce(update, 100);
+var lazyUpdate = _.debounce(update, 50);
 
-// Set event only after DOM is ready
+var origOnLoad = 
 $(function() {
 	// Watch for resize events
 	var origOnResize = win.onresize;
@@ -88,22 +89,18 @@ $(function() {
 	}
 
 	// Watch for mutation events
-	if (typeof MutationObserver === 'function' && win.document.children) {
-		var insertedNodes = [];
-		var observer = new MutationObserver(function(mutations) {
-			mutations.forEach(function(mutation) {
-				for (var i = 0; i < mutation.addedNodes.length; i++)
-					insertedNodes.push(mutation.addedNodes[i]);
-			})
-			lazyUpdate();
-		});
-		observer.observe(win.document, {
+	if (typeof MutationObserver === 'function') {
+		var observer = new MutationObserver(lazyUpdate);
+		observer.observe(win.document.body, {
 			childList: true,
 			attributes: true,
 			characterData: true,
 			subtree: true,
 			attributeFilter: true
 		});
+	} else {
+		debug.warn('reactive-window: no MutationObserver, won\'t notice scrollbars');
+		// uh, TODO, go back to polling every 100ms
 	}
 
 	// Update first value now that DOM is ready

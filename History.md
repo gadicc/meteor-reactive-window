@@ -1,5 +1,10 @@
 ## vNEXT
 
+## v1.0.4
+
+* Fixes "Failed to execute 'observe' on 'MutationObserver'" on some Chrome
+  versoins.  Big thanks to @productiveme for solving this!
+
 ## v1.0.1
 
 * Only setup the MutationObserver if it's available (in current browser)

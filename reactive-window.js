@@ -78,7 +78,6 @@ rwindow.forceUpdate = update;
 // Set a debounce function for avoiding to fire too many events
 var lazyUpdate = _.debounce(update, 50);
 
-var origOnLoad = 
 $(function() {
 	// Watch for resize events
 	var origOnResize = win.onresize;
@@ -95,8 +94,7 @@ $(function() {
 			childList: true,
 			attributes: true,
 			characterData: true,
-			subtree: true,
-			attributeFilter: true
+			subtree: true
 		});
 	} else {
 		debug.warn('reactive-window: no MutationObserver, won\'t notice scrollbars');

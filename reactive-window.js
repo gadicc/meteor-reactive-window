@@ -76,18 +76,18 @@ var update = function() {
 rwindow.forceUpdate = update;
 
 // Set a debounce function for avoiding to fire too many events
-var lazyUpdate = _.debounce(update, 50);
+var lazyUpdate = _.debounce(update, 100);
+
+// Watch for resize events
+var origOnResize = win.onresize;
+rwindow.window.onresize = function() {
+	if (origOnResize)
+		origOnResize.apply(this, arguments);
+	lazyUpdate();
+};
 
 $(function() {
-	// Watch for resize events
-	var origOnResize = win.onresize;
-	rwindow.window.onresize = function() {
-		if (origOnResize)
-			origOnResize.apply(this, arguments);
-		lazyUpdate();
-	}
-
-	// Watch for mutation events
+	// Watch for mutation events (requires win.document.body)
 	if (typeof MutationObserver === 'function') {
 		var observer = new MutationObserver(lazyUpdate);
 		observer.observe(win.document.body, {
@@ -100,7 +100,7 @@ $(function() {
 		debug.warn('reactive-window: no MutationObserver, won\'t notice scrollbars');
 		// uh, TODO, go back to polling every 100ms
 	}
-
-	// Update first value now that DOM is ready
-	lazyUpdate();
 });
+
+// This only requires window, not document.body
+update();

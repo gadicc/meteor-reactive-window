@@ -1,5 +1,11 @@
 ## vNEXT
 
+## v1.0.5
+
+* Debounce back to 100ms from 50ms.
+* Set initial values earluer, during load instead of document.onready;
+  Fixes issues in Firefox and Safari (#4)
+
 ## v1.0.4
 
 * Fixes "Failed to execute 'observe' on 'MutationObserver'" on some Chrome

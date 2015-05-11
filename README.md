@@ -2,6 +2,8 @@
 
 The start of some reactive helpers to work with screen size, etc.
 
+To use: `meteor add gadicc:reactive-window` in your project folder.
+
 ## In JavaScript:
 
 * `rwindow.innerWidth()` and `rwindow.outerWidth()` - window width

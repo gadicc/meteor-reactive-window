@@ -2,7 +2,7 @@
 
 The start of some reactive helpers to work with screen size, etc.
 
-To use: `meteor add gadicc:reactive-window` in your project folder.
+To use: `meteor add gadicohen:reactive-window` in your project folder.
 
 ## In JavaScript:
 

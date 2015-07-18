@@ -97,7 +97,7 @@ $(function() {
 			subtree: true
 		});
 	} else {
-		debug.warn('reactive-window: no MutationObserver, won\'t notice scrollbars');
+		console.warn('reactive-window: no MutationObserver, won\'t notice scrollbars');
 		// uh, TODO, go back to polling every 100ms
 	}
 });

@@ -88,6 +88,7 @@ $(function() {
 	 * browser will add a vertical scrollbar, which decreases the window's width.  We
 	 * should pick this up and trigger appropriate changes.
 	 */
+	if (typeof MutationObserver === 'function') // remove if we move back to polling + stub phantomjs fakeWindow
 	Tinytest.addAsync('reactive-window - vertical scrollbar test', function(test, complete) {
 		var doc = rwindow.window.document;
 		var div = doc.createElement('div');

@@ -83,12 +83,16 @@ $(function() {
 	});
 
 
+	/*
+	 * If the content of the window exceeds it's height, by default (overflow: auto), the
+	 * browser will add a vertical scrollbar, which decreases the window's width.  We
+	 * should pick this up and trigger appropriate changes.
+	 */
 	Tinytest.addAsync('reactive-window - vertical scrollbar test', function(test, complete) {
 		var doc = rwindow.window.document;
 		var div = doc.createElement('div');
 
-		getNext('$width', function(width) {
-			var oldWidth = rwindow.$width();
+		getNext('$width', function(oldWidth) {
 			getNext('$width', function(newWidth) {
 				test.isTrue(newWidth < oldWidth);
 				complete();

@@ -1,7 +1,7 @@
 Package.describe({
   name: "gadicohen:reactive-window",
   summary: "Reactive functions for window properties; width, scroll, etc",
-  version: "1.0.5",
+  version: "1.0.6",
   git: "https://github.com/gadicc/meteor-reactive-window.git"
 });
 

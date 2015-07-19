@@ -1,6 +1,11 @@
 ## vNEXT
 
-* Remove dep to unused sdecima:javascript-detect-element-resize
+## v1.0.6
+
+* Performance: don't invalidate comparison queries (gte, etc) if the return
+  result hasn't changed (#7)
+* Cleanup: Remove dep to unused sdecima:javascript-detect-element-resize (#6)
+* Bugfix: debug->console to avoid crash when no mutation observers (#8)
 
 ## v1.0.5
 

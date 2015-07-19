@@ -1,5 +1,7 @@
 ## vNEXT
 
+* Remove dep to unused sdecima:javascript-detect-element-resize
+
 ## v1.0.5
 
 * Debounce back to 100ms from 50ms.

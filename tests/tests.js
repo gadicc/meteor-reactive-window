@@ -47,6 +47,42 @@ $(function() {
 		test.isTrue(rwindow.check('screen', 'lte', 'large'));
 	});
 
+	Tinytest.addAsync('reactive-window - gte/etc only invalidates on boolean change', function(test, complete) {
+		testWindow.resizeTo(100,100);
+		rwindow.forceUpdate();
+
+		var changeCount = 0;
+		var handle = Tracker.autorun(function() {
+			rwindow.check('screen', 'gt', 'xsmall');
+			changeCount++;
+		});
+
+		// consecutively larger widths that are all still considered "xsmall"
+		window.setTimeout(function() {
+			testWindow.resizeTo(200,100);
+			rwindow.forceUpdate();
+
+			window.setTimeout(function() {
+				testWindow.resizeTo(300,100);
+				rwindow.forceUpdate();
+
+				window.setTimeout(function() {
+					testWindow.resizeTo(400,100);
+					rwindow.forceUpdate();
+				}, 10);
+
+			}, 10);
+
+		}, 10);
+
+		window.setTimeout(function() {
+			test.equal(changeCount, 1, 'gte rendered ' + changeCount + ' times');
+			complete();
+		}, 500);
+
+	});
+
+
 	Tinytest.addAsync('reactive-window - vertical scrollbar test', function(test, complete) {
 		var doc = rwindow.window.document;
 		var div = doc.createElement('div');

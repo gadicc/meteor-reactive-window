@@ -4,10 +4,17 @@ rwindow = {
 	_dict: new ReactiveDict(),
 	get: function(key) { return this._dict.get(key); },
 	set: function(key, value) { return this._dict.set(key, value); },
+
 	check: function(key, op, value) {
 		if (!op)
 			return this._dict.get(key);
 
+		return isolateValue(function() {
+			return rwindow._check(key, op, value);
+		});
+	},
+
+	_check: function(key, op, value) {
 		if (validOps.indexOf(op) === -1)
 			throw new Error('[reactive-window] "op" must be one of: '
 				+ 'lte, lt, eq, gt, gte (not "' + op + '")');

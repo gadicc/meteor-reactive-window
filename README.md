@@ -1,6 +1,11 @@
 # reactive-window [![Build Status](https://api.travis-ci.org/gadicc/meteor-reactive-window.svg?branch=master)](https://travis-ci.org/gadicc/meteor-reactive-window)
 
-The start of some reactive helpers to work with screen size, etc.
+Reactive helpers to work with screen size, etc.
+
+Copyright (c) 2014-2016 Gadi Cohen <dragon@wastelands.net>, released under
+the MIT license (see [LICENSE.txt](./LICENSE.txt)).
+
+## Usage
 
 To use: `meteor add gadicohen:reactive-window` in your project folder.
 

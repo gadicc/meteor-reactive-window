@@ -1,5 +1,7 @@
 ## vNEXT
 
+* Release under MIT license (2016-12-04), refresh Meteor package metadata.
+
 ## v1.0.6
 
 * Performance: don't invalidate comparison queries (gte, etc) if the return
